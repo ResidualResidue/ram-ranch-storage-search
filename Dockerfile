@@ -12,15 +12,36 @@
 
 # COPY --from=build /app/build /usr/share/nginx/html 
 
+#_______________________________________________________
 
-FROM node:lts-alpine as build
+# FROM node:lts-alpine as build
 
-COPY package.json /app/
+# COPY package.json /app/
 
+# WORKDIR /app
+
+# RUN npm install
+
+# COPY . .
+
+# CMD ["npm", "start"]
+
+# Set base image
+FROM node:latest AS builder
+
+# Set working directory
 WORKDIR /app
 
+# Copy package.json and install packages
+COPY package.json .
 RUN npm install
 
-COPY . .
+# Copy other project files and build
+COPY . ./
+RUN npm run build
 
-CMD ["npm", "start"]
+# Set nginx image
+FROM nginx:latest
+
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf 
+COPY --from=builder /app/build /usr/share/nginx/html 
