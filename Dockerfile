@@ -1,13 +1,26 @@
-FROM node:lts-alpine as build 
+# FROM node:lts-alpine as build 
+
+# WORKDIR /app
+
+# COPY package.json .
+# RUN npm install 
+# COPY . .
+# RUN npm run build
+
+# FROM nginx
+# COPY ./nginx/nginx.conf /etc/nginx/nginx.conf 
+
+# COPY --from=build /app/build /usr/share/nginx/html 
+
+
+FROM node:lts-alpine as build
+
+COPY package.json /app/
 
 WORKDIR /app
 
-COPY package.json .
-RUN npm install 
+RUN npm install
+
 COPY . .
-RUN npm run build
 
-FROM nginx
-COPY ./nginx/nginx.conf /etc/nginx/nginx.conf 
-
-COPY --from=build /app/build /usr/share/nginx/html 
+CMD ["npm", "start"]
