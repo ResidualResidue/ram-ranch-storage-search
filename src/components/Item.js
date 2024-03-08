@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ChestVisual from './ChestVisual.js'
 
 function convertDisplayNameToPictureName(displayName){
     let toRet=displayName.toLowerCase().replace(/\s/g, '_');
@@ -28,7 +29,13 @@ function Item({item}) {
         <div className='item' onMouseEnter={toggleDisplayLocationInfoTrue} onMouseLeave={toggleDisplayLocationInfoFalse}>
             <img style={{width: 40, height: 40}} src={imgSrc} alt={item.name + '.jpg'}></img>
             <h3>{item.displayName}</h3>
-            { displayLocationInfo ? <p style={{marginLeft: 50}}>floor {item.floor} : chest {item.chest}</p> : '' }
+            { displayLocationInfo ? 
+                <div>
+                    <p style={{marginLeft: 50}}>floor {item.floor}</p>
+                    <p style={{marginLeft: 50}}>Chest {item.chest}</p>
+                    <p style={{marginLeft: 50}}>Wall: {item.wall}</p>
+                    <ChestVisual chestnum={item.chest} wall={item.wall}></ChestVisual>
+                </div> : '' }
         </div>
     )
 

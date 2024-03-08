@@ -109,15 +109,14 @@ function App() {
 
   return (
     <div className="container">
-      <img className="cowboy" src="/imgs/dancing-jon-pardi.gif" alt="Dancing Cowboy"></img>
+      <img className="cowboy" src="/imgs/dancing-jon-pardi.gif" alt="s"></img>
       <div className="cowboy">
         <Header />
         <Button clickFunc={setKeywordSearch} color={DARKBROWN} label="Keyword Search" />
         <Button clickFunc={setPictureSearch} color={DARKGREEN} label="Picture Search" />
-        <p>displaying {searchView}</p>
         {searchView === PICTURESEARCH ? <PictureSeachView /> : <KeywordSearchView searchTerm={searchTerm} displayItems={displayItems} searchFunction={searchFunction} />}
       </div>
-      <img className="cowboy" src="/imgs/dancing_cowboy.gif" alt="Dancing Cowboy 2"></img>
+      <img className="cowboy" src="/imgs/dancing_cowboy.gif" alt="s"></img>
     </div>
   );
 }
